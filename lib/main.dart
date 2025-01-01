@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(
@@ -58,7 +59,14 @@ class _HomePageState extends State<HomePage> {
               hintText: "Enter your password",
             ),
           ),
-          TextButton(onPressed: () {}, child: Text("Register")),
+          TextButton(
+              onPressed: () async {
+                final email = _email.text;
+                final password = _password.text;
+                FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: email, password: password);
+              },
+              child: Text("Register")),
         ],
       ),
     );
